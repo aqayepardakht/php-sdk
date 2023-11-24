@@ -37,6 +37,9 @@ class VerifyPaymentStrategy implements PaymentStrategy {
         $response = (new Client())->post(Helper::getBaseUrl('verify'), $params);
         $response = $response->json();
 
+        if (!$response)
+            throw new \Exception("Error: مشکلی در اتصال به آقای پرداخت وجود دارد لطفا دوباره تلاش کنید", 0);
+
         if ($response->status == 'error') 
             throw new \Exception("Error: ".$response->message, $response->code);
         

@@ -20,7 +20,7 @@ class PaymentService {
 
     public function __construct(string $pin, Invoice $invoice) {
         $this->pin     = $pin;
-        $this->invoice = $invoice; 
+        $this->invoice = $invoice;
     }
 
     public function create(): self {
@@ -28,19 +28,19 @@ class PaymentService {
 
         $trackingCode = $this->process();
 
-        $this->invoice->setTraceCode($trackingCode);
+        $this->invoice->setTrackingCode($trackingCode);
 
         return $this;
     }
 
     public function verify(string $traceCode): self {
-        $this->setStrategy(new VerifyPaymentStrategy($this->pin, $traceCode, $this->invoice->getAmount()));
+        $this->setStrategy(new VerifyPaymentStrategy($this->pin, $traceCode, $this->invoice->amount));
         $this->process();
         return $this;
     }
 
     public function start($trackingCode = null): self {
-        if (!$trackingCode) $trackingCode = $this->invoice->getTraceCode();
+        if (!$trackingCode) $trackingCode = $this->invoice->getTrackingCode();
 
         $this->setStrategy(new StartPaymentStrategy($trackingCode));
         $this->process();
