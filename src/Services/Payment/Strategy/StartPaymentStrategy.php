@@ -1,6 +1,6 @@
 <?php 
 
-namespace Aqayepardakht\PhpSdk\Strategy;
+namespace Aqayepardakht\PhpSdk\Services\Payment\Strategy;
 
 use Aqayepardakht\PhpSdk\Helper;
 use Aqayepardakht\PhpSdk\Interfaces\PaymentStrategy;
@@ -38,9 +38,5 @@ class StartPaymentStrategy implements PaymentStrategy {
         $url = str_replace('v3/', '' ,Helper::getBaseUrl());
 
         return $url . 'startpay/'.$this->traceCode;
-    }
-
-    public function getAction(): string {
-        return 'start';
     }
 }

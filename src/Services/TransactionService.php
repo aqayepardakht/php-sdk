@@ -1,6 +1,6 @@
 <?php 
 
-namespace Aqayepardakht\PhpSdk\Services\Transaction;
+namespace Aqayepardakht\PhpSdk\Services;
 
 use Aqayepardakht\Http\Response;
 use Aqayepardakht\Http\Client;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Aqayepardakht\PhpSdk\Strategy;
+namespace Aqayepardakht\PhpSdk\Services\Payment\Strategy;
 
 use Aqayepardakht\Http\Client;
 use Aqayepardakht\PhpSdk\Helper;
@@ -29,10 +29,11 @@ class VerifyPaymentStrategy implements PaymentStrategy {
     }
 
     public function process() {
-        $params            = [];
-        $params["pin"]     = $this->pin;
-        $params['transid'] = $this->traceCode;
-        $params['amount']  = $this->amount;
+        $params            = [
+            'pin' => $this->pin,
+            'transid' => $this->traceCode,
+            'amount' => $this->amount
+        ];
         
         $response = (new Client())->post(Helper::getBaseUrl('verify'), $params);
         $response = $response->json();
@@ -45,9 +46,5 @@ class VerifyPaymentStrategy implements PaymentStrategy {
         
         
         return $response;
-    }
-
-    public function getAction(): string {
-        return 'verify';
     }
 }

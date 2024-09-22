@@ -4,6 +4,7 @@ namespace Aqayepardakht\PhpSdk;
 
 class Invoice {
     private array $data = [];
+    private string $traceCode;
 
     public function __construct(array $data) {
         foreach ($data as $key => $value) {
@@ -31,30 +32,33 @@ class Invoice {
 
     public function validate(): void {
         $this->validateAmount();
-        if (isset($this->cards))
+        if (isset($this->cards)) {
             $this->validateCards();
-        if (isset($this->phone))
+        }
+        if (isset($this->phone)) {
             $this->validateMobile();
-        if (isset($this->email))
+        }
+        if (isset($this->email)) {
             $this->validateEmail();
+        }
     }
 
     private function validateAmount(): void {
         $amount = floatval(Helper::faToEnNumbers($this->amount));
 
-        if ($amount == 0 || $amount < 1000 || $amount >= 100000000) {
-            throw new \Exception('مبلغ باید به صورت عددی و بیشتر از 1000 تومان و کمتر از  100,000,000 باشد');
+        if ($amount <= 1000 || $amount >= 100000000) {
+            throw new \InvalidArgumentException('مبلغ باید بیشتر از 1000 تومان و کمتر از 100,000,000 باشد');
         }
     }
 
     private function validateCards(): void {
-        $cards = $this->card ?? [];
+        $cardNumbers = $this->cards ?? [];
 
-        if (!is_array($cards)) {
-            $cards = [$cards];
+        if (!is_array($cardNumbers)) {
+            $cardNumbers = [$cardNumbers];
         }
 
-        foreach ($cards as $card) {
+        foreach ($cardNumbers as $card) {
             Helper::validateCardsNumber($card);
         }
     }
@@ -67,11 +71,11 @@ class Invoice {
         Helper::validateEmail($this->email);
     }
 
-    public function setTrackingCode($traceCode) {
+    public function setTrackingCode(string $traceCode): void {
         $this->traceCode = $traceCode;
     }
 
-    public function getTrackingCode() {
+    public function getTrackingCode(): string {
         return $this->traceCode;
     }
 }

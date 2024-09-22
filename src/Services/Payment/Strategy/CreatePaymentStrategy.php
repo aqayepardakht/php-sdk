@@ -1,11 +1,11 @@
 <?php 
 
-namespace Aqayepardakht\PhpSdk\Strategy;
+namespace Aqayepardakht\PhpSdk\Services\Payment\Strategy;
 
+use Aqayepardakht\PhpSdk\Interfaces\PaymentStrategy;
 use Aqayepardakht\Http\Client;
 use Aqayepardakht\PhpSdk\Helper;
 use Aqayepardakht\PhpSdk\Invoice;
-use Aqayepardakht\PhpSdk\Interfaces\PaymentStrategy;
 
 class CreatePaymentStrategy implements PaymentStrategy {
     /**
@@ -37,16 +37,14 @@ class CreatePaymentStrategy implements PaymentStrategy {
 
         $response = $response->json();
 
-        if (!$response)
+        if (!$response) {
             throw new \Exception("Error: مشکلی در اتصال به آقای پرداخت وجود دارد لطفا دوباره تلاش کنید", 0);
+        }
 
-        if ($response->status == 'error')  
+        if ($response->status == 'error') {
             throw new \Exception("Error: ".$response->message, $response->code);
+        }
         
         return $response->tracking_code;   
-    }
-
-    public function getAction(): string {
-        return 'create';
     }
 }
