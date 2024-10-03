@@ -31,11 +31,12 @@ class VerifyPaymentStrategy implements PaymentStrategy {
     public function process() {
         $params            = [
             'pin' => $this->pin,
-            'transid' => $this->traceCode,
+            'tracking_code' => $this->traceCode,
             'amount' => $this->amount
         ];
         
         $response = (new Client())->post(Helper::getBaseUrl('verify'), $params);
+
         $response = $response->json();
 
         if (!$response)

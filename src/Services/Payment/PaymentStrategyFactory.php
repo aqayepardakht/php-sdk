@@ -2,7 +2,7 @@
 
 namespace Aqayepardakht\PhpSdk\Services\Payment;
 
-use Aqayepardakht\PhpSdk\Strategy\{
+use Aqayepardakht\PhpSdk\Services\Payment\Strategy\{
     CreatePaymentStrategy,
     VerifyPaymentStrategy,
     StartPaymentStrategy

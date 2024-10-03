@@ -2,7 +2,7 @@
 
 namespace Aqayepardakht\PhpSdk\Services;
 
-use Aqayepardakht\PhpSdk\Services\PaymentService;
+use Aqayepardakht\PhpSdk\Services\Payment\PaymentService;
 use Aqayepardakht\PhpSdk\Services\Transaction\TransactionService;
 use Aqayepardakht\PhpSdk\Invoice;
 use InvalidArgumentException;
