@@ -17,16 +17,16 @@ class Invoice {
     public function getItems(): array {
         return [
             "amount"        => $this->amount,
-            "invoice_id"    => $this->invoice_id,
-            "mobile"        => $this->phone,
-            "email"         => $this->email,
-            'description'   => $this->description,
-            'callback'      => $this->callback,
-            'cards'         => $this->cards,
-            'name'          => $this->name,
-            'national_code' => $this->national_code,
-            'method'        => $this->method,
-            'sms'           => $this->sms
+            "invoice_id"    => $this->invoice_id ?? null,
+            "mobile"        => $this->phone ?? null,
+            "email"         => $this->email ?? null,
+            'description'   => $this->description ?? null,
+            'callback'      => $this->callback ?? null,
+            'cards'         => $this->cards ?? null,
+            'name'          => $this->name ?? null,
+            'national_code' => $this->national_code ?? null,
+            'method'        => $this->method ?? null,
+            'sms'           => $this->sms ?? null
         ];
     }
 
