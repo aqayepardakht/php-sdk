@@ -4,6 +4,7 @@ namespace Aqayepardakht\PhpSdk\Services\Payment\Strategy;
 
 use Aqayepardakht\Http\Client;
 use Aqayepardakht\PhpSdk\Helper;
+use Aqayepardakht\PhpSdk\Enums\EndPoints;
 use Aqayepardakht\PhpSdk\Interfaces\PaymentStrategy;
 
 class VerifyPaymentStrategy implements PaymentStrategy {
@@ -35,7 +36,11 @@ class VerifyPaymentStrategy implements PaymentStrategy {
             'amount' => $this->amount
         ];
         
-        $response = (new Client())->post(Helper::getBaseUrl('verify'), $params);
+        $response = (new Client())->post(Helper::getBaseUrl(
+            EndPoints::AQP_PRODUCTION, 
+            'verify'), 
+            $params
+        );
 
         $response = $response->json();
 
